@@ -21,20 +21,22 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User implements UserDetails {
+@Table(name = "tb_user")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100, nullable = false, unique = true)
+    @Column
     private String email;
 
-    @Column(length = 100, nullable = false)
+    @Column
     private String name;
 
     @Column(length = 1000)
@@ -44,35 +46,29 @@ public class User implements UserDetails {
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public String getUsername() {
-        return name;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+//    public String getUsername() {
+//        return name;
+//    }
+//
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+//
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+//
+//    public boolean isEnabled() {
+//        return true;
+//    }
 }

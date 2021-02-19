@@ -38,22 +38,18 @@ public class ProductService{
 	
 	@Autowired
 	private ProductRepository productReps;
-//	
-//	public void saveProduct(Product productTO) {
-//		productReps.save(productTO);
-//	}
 	
 
-	@GetMapping(value="/s")
-	public String hell() {
-		return "helloworld";
-	}
-	@PostMapping(value="/save")
-	public void saveProduct(@RequestBody Product product) {
-		System.out.println(product.getDescription());
-		productReps.save(product);
+	
+	@GetMapping("")
+	public List<Product> getAllProduct() {
+		return productReps.findAll();
 	}
 	
+	@PostMapping("/save")
+	public void saveProduct(@RequestBody Product product) {
+		productReps.save(product);
+	}
 	
 //	/,파라미터  SalesInfoSaveRequestDto dto
 	@PostMapping(value="/upload")
@@ -63,7 +59,6 @@ public class ProductService{
 			String filePath = baseDir + "\\" + files.getOriginalFilename();
 			System.out.println(filePath);	
 			files.transferTo(new File(filePath));
-			
 //			Authentication user = SecurityContextHolder.getContext().getAuthentication(); 
 //			String sellerID = user.getName(); 
 //			dto.setUserID(sellerID); 

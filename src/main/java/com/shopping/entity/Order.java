@@ -32,13 +32,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long oId;
     
-    
-    @Column
-    private double sum;
-    
-    @Column
+	@Column
     private Date date;
-    
     
     @Column
     private String phone;
@@ -49,6 +44,44 @@ public class Order {
     @Column
     private String address;
     
-//    @ManyToOne
-//    private User user;
+    
+    @Column
+    private int order_amount;
+    
+    @ManyToOne
+	@JoinColumn(name="id")
+    private User user;
+
+    public Long getoId() {
+		return oId;
+	}
+
+	public void setoId(Long oId) {
+		this.oId = oId;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setOrder_amount(int order_amount) {
+		this.order_amount = order_amount;
+	}
+
 }
